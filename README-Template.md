@@ -1,4 +1,4 @@
-# Steering angle prediction using Lane detection
+# Steering Angle Prediction using Lane detection
 
 Please see [full report](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/reports/NN_Project.pdf)
 
@@ -14,7 +14,7 @@ All of code is written in Python (2.7)
 * Install PIL for python
 
 
-## Lane detection
+## Lane Detection
 
 The objective of this module is to detect the lane on the road on which the vehicle is travelling given an image facing towards the road taken while driving. we have used a deep learning architecture inspired from : [Project](https://github.com/mvirgo/mlnd-capstone)
 ```
@@ -31,11 +31,11 @@ The architecture uses a combination of convolutional layers with RELu, batch nor
 
 
 
-## steering angle Predictor
+## Steering Angle Predictor
 
 ### Dataset
 
-We use [Udacity datset] for our training and testing. [This code](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/read_udacity.py) contains methods to convert training (and testing) data to npy files for easier use.
+We use [Udacity datset](https://github.com/udacity/self-driving-car/tree/master/datasets/CH2) for our training and testing. [This code](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/read_udacity.py) contains methods to convert training (and testing) data to npy files for easier use.
 Both the labels and images saved as 2 separate files.
 
 ```
@@ -44,7 +44,7 @@ For ex: Training labels  are saved as [Y_center.npy](https://github.com/abhishek
 
  We have used only centre camera from dataset as evident from file name. 
  
- [Datasetoverview](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/dataset_overview.py) file sees the hisotgram of dataset and is used for data augmentation. For now, we have removed some neutral angles with 40% probability. We are saving the new npy files with added keyword 'new' in filename.
+[Dataset overview](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/dataset_overview.py) file visualises the hisotgram of dataset and is used for data augmentation. For now, we have removed some neutral angles with 40% probability. We are saving the new npy files with added keyword 'new' in filename.
  
  ```
  For ex: Y_center.npy becomes Y_center_new.npy
