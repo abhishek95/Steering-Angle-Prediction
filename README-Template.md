@@ -1,6 +1,6 @@
 # Steering angle prediction using Lane detection
 
-Steering angle prediction using Lane detection
+Please see [full report](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/reports/NN_Project.pdf)
 
 ## Getting Started
 
@@ -14,16 +14,16 @@ All of code is written in Python (2.7)
 * Install PIL for python
 
 
-### Lane detection
+## Lane detection
 
 The objective of this module is to detect the lane on the road on which the vehicle is travelling given an image facing towards the road taken while driving. we have used a deep learning architecture inspired from : [Project](https://github.com/mvirgo/mlnd-capstone)
 ```
 The architecture uses a combination of convolutional layers with RELu, batch normalization, pooling, upsampling and dropout layer. The network used a filter size of 3x3 and max pooling layer of size 2x2 with a total parameter count of 181, 693.
 ```
- ## Dataset
+### Dataset
   We have used datset from [here](https://www.dropbox.com/s/rrh8lrdclzlnxzv/full_CNN_train.p?dl=0) for input images, and [here](https://www.dropbox.com/s/ak850zqqfy6ily0/full_CNN_labels.p?dl=0). Again thanks to [github](https://github.com/mvirgo/mlnd-capstone)
 
-## Files
+### Files
 
 * [Lane detection layer](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/lane_detection_layer.py) contains the architecture of CNN layers, loading saved model etc.
 * [Lane detection](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/lane_detection.py) uses all the methods in above file to train and save lane detection module. 
@@ -31,59 +31,58 @@ The architecture uses a combination of convolutional layers with RELu, batch nor
 
 
 
-End with an example of getting some data out of the system or using it for a little demo
+## steering angle Predictor
 
-## Running the tests
+### Dataset
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+We use [Udacity datset] for our training and testing. [This code](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/read_udacity.py) contains methods to convert training (and testing) data to npy files for easier use.
+Both the labels and images saved as 2 separate files.
 
 ```
-Give an example
+For ex: Training labels  are saved as [Y_center.npy](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/datasets/Y_center.npy)
 ```
 
-### And coding style tests
+ We have used only centre camera from dataset as evident from file name. 
+ 
+ [Datasetoverview](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/dataset_overview.py) file sees the hisotgram of dataset and is used for data augmentation. For now, we have removed some neutral angles with 40% probability. We are saving the new npy files with added keyword 'new' in filename.
+ 
+ ```
+ For ex: Y_center.npy becomes Y_center_new.npy
+ We are augmenting training files only. We are not touching testing files at all.
+ ```
+ We will use theese 'new' files our training purposes.
 
-Explain what these tests test and why
+### Vanilla Training
 
-```
-Give an example
-```
+This does not use the lane detector module. It simply trains on input images.
+* This [code](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/vanilla_steering_angle.py) - Vanilla steering angle
 
-## Deployment
+* There are 2 types of architectures:-
+** [VGG model](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/steering_vgg_model.py) All details in report.
+** [Nvidia model](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/steering_nvidia_model.py) All details in report.
 
-Add additional notes about how to deploy this on a live system
+* models are stored in 'vanilla' keyword in h5 files.
 
-## Built With
+### Lane detector + Steering angle
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+First predict, lanes on the road. Then use those images to predict steering anlgle.
 
-## Contributing
+* This [code](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/steering_angle.py) - Steering angle
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* There are 2 types of architectures:-
+** [VGG model](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/steering_vgg_model.py) All details in report.
+** [Nvidia model](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/steering_nvidia_model.py) All details in report.
 
-## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* **Abhishek Singhal** - [abhishek95](https://github.com/abhishek95)
+* **Dilip Chakravrthy** - [kavarthapudilip](https://github.com/kavarthapudilip)
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* [Udacity](https://github.com/udacity/self-driving-car) for steering angle dataset.
+* [Mvirgo](https://github.com/mvirgo/mlnd-capstone) for lane detection module and dataset.
+
 
