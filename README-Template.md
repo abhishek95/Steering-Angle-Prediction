@@ -1,34 +1,35 @@
 # Project Title
 
-One Paragraph of project description goes here
+Steering angle prediction using Lane detection
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+We have built lane detection module and steering angle module. Though steering angle module uses inputs of lane detection, it can be tweaked to use only input images only.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+All of code is written in Python (2.7)
+* Install Keras, with tensorflow as backend
+* Install cv2
+* Install PIL for python
 
+
+### Lane detection
+
+The objective of this module is to detect the lane on the road on which the vehicle is travelling given an image facing towards the road taken while driving. we have used a deep learning architecture inspired from : [Project](https://github.com/mvirgo/mlnd-capstone)
 ```
-Give examples
+The architecture uses a combination of convolutional layers with RELu, batch normalization, pooling, upsampling and dropout layer. The network used a filter size of 3x3 and max pooling layer of size 2x2 with a total parameter count of 181, 693.
 ```
+ ## Dataset
+  We have used datset from [here](https://www.dropbox.com/s/rrh8lrdclzlnxzv/full_CNN_train.p?dl=0) for input images, and [here](https://www.dropbox.com/s/ak850zqqfy6ily0/full_CNN_labels.p?dl=0). Again thanks to [github](https://github.com/mvirgo/mlnd-capstone)
 
-### Installing
+## Files
 
-A step by step series of examples that tell you have to get a development env running
+* [Lane detection layer](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/lane_detection_layer.py) contains the architecture of CNN layers, loading saved model etc.
+* [Lane detection](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/lane_detection.py) uses all the methods in above file to train and save lane detection module. 
+* [Full CNN model](https://github.com/abhishek95/Steering-Angle-Prediction/blob/master/src/full_CNN_model_30.h5) has been trained for 30 epochs. We can directly load this trained network.
 
-Say what the step will be
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
 
 End with an example of getting some data out of the system or using it for a little demo
 
