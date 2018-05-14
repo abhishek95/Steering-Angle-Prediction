@@ -1,4 +1,4 @@
-# Project Title
+# Steering angle prediction using Lane detection
 
 Steering angle prediction using Lane detection
 
